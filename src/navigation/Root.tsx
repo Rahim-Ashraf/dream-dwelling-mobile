@@ -1,19 +1,16 @@
-import { View, Text, ScrollView, useColorScheme } from 'react-native'
-import Card from '../components/Card/Card'
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../components/Home/Home';
 import { NavigationContainer } from '@react-navigation/native';
 import Profile from '../components/Profile/Profile';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const Stack = createNativeStackNavigator()
+type RootStackParamList = {
+  Home: undefined;
+  Profile: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>()
 
 const Root = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  }
 
   return (
     <NavigationContainer>
