@@ -5,7 +5,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 type RootStackParamList = {
   Home: undefined;
-  Profile: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
@@ -18,11 +17,6 @@ const Root = () => {
         <Stack.Screen
           name='Home'
           component={Home}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name='Profile'
-          component={Profile}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

@@ -1,23 +1,26 @@
-import React from 'react';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { View, Text, Button } from 'react-native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Profile from '../Profile/Profile';
+import HomeScreen from './HomeScreen';
 
-type RootStackParamList = {
+type BottomTabParamList = {
   Home: undefined;
-  Profile: { userId: string };
+  Profile: undefined;
+  Properties: undefined;
 };
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+const Tab = createBottomTabNavigator<BottomTabParamList>();
 
-const Home = ({ navigation }: Props) => {
+const Home = () => {
   return (
-    <View>
-      <Text>Home</Text>
-      <Text >Go profile</Text>
-      <Button
-        title="Profile"
-        onPress={() => navigation.navigate('Profile', { userId: 'Profile' })}
+    <Tab.Navigator>
+      <Tab.Screen name="Home"
+        component={HomeScreen}
+        options={{ headerShown: false }}
       />
-    </View>
+      <Tab.Screen name="Properties"
+        component={Profile}
+        options={{ headerShown: false }}
+      />
+    </Tab.Navigator>
   )
 }
 
