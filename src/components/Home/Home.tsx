@@ -31,7 +31,6 @@ const Home = ({ navigation }: Props) => {
 
   return (
     <ScrollView>
-
       <ImageBackground
         source={require('../../components/icons/greg-rivers-min.jpg')}
         resizeMode="cover" >
@@ -81,8 +80,8 @@ const Home = ({ navigation }: Props) => {
                 marginBottom: 10,
               }}
               onError={(error) => console.log('Image loading error:', error.nativeEvent)}
-              onLoadStart={() => console.log('Image loading started', property_image)}
-              onLoad={() => console.log('Image loading successful')}
+              // onLoadStart={() => console.log('Image loading started', property_image)}
+              // onLoad={() => console.log('Image loading successful')}
             />
             <View style={{
               flexDirection: "row",
