@@ -58,6 +58,10 @@ const Home = ({ navigation }: Props) => {
       </ImageBackground>
 
       <View style={{ padding: 20 }}>
+        <Text style={{
+          fontSize: 30, textAlign: "center",
+          color: "#0aa0ff", marginVertical: 10,
+        }}>Featured listings</Text>
         {
           advertisements.map(({ _id, property_location, price_range, property_image }) => <View
             key={_id}
@@ -70,9 +74,9 @@ const Home = ({ navigation }: Props) => {
           >
             <Image
               // uri: 'https://img.freepik.com/free-photo/3d-house-model-with-modern-architecture_23-2151004049.jpg'
-              source={{ uri: property_image }}
+              source={{ uri: 'https://img.freepik.com/free-photo/3d-house-model-with-modern-architecture_23-2151004049.jpg' }}
               style={{
-                width: "auto", height: 150,
+                width: "auto", height: 200,
                 borderRadius: 10,
                 marginBottom: 10,
               }}
