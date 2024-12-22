@@ -1,10 +1,10 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
-import { Button, Image, ScrollView, Text, View } from 'react-native';
+import { Button, Image, ImageBackground, ScrollView, Text, View } from 'react-native';
 
 type RootStackParamList = {
   Home: undefined;
-  Profile: { userId: string };
+  Properties: undefined;
 };
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
@@ -31,42 +31,72 @@ const Home = ({ navigation }: Props) => {
 
   return (
     <ScrollView>
-      <View style={{ padding: 20 }}>
-        <Text
-          style={{ fontSize: 50, textAlign: "center", marginBottom: 20 }}
-        >Hello there</Text>
-        <Text style={{ textAlign: "center", marginBottom: 40 }}>
-          At Dream Dwelling, we help you find more than just a house—we help you discover the perfect home. With a curated selection of top-tier properties and personalized services, your dream home is just a click away. Begin your journey today and experience the difference with Dream Dwelling
-        </Text>
-        <View style={{ width: 200, margin: "auto" }}>
-          <Button title='Get Started' />
+
+      <ImageBackground
+        source={require('../../components/icons/greg-rivers-min.jpg')}
+        resizeMode="cover" >
+        <View
+          style={{ padding: 50, backgroundColor: '#00001aaa', }}>
+          <Text
+            style={{
+              fontSize: 50, textAlign: "center",
+              marginBottom: 20, color: "white"
+            }}
+          >Hello there</Text>
+          <Text
+            style={{
+              textAlign: "center", marginBottom: 40,
+              color: "white"
+            }}>
+            At Dream Dwelling, we help you find more than just a house—we help you discover the perfect home. With a curated selection of top-tier properties and personalized services, your dream home is just a click away. Begin your journey today and experience the difference with Dream Dwelling
+          </Text>
+          <View style={{ width: 200, margin: "auto" }}>
+            <Button title='Get Started'
+              onPress={() => navigation.navigate('Properties')} />
+          </View>
         </View>
-      </View>
+      </ImageBackground>
+
       <View style={{ padding: 20 }}>
         {
           advertisements.map(({ _id, property_location, price_range, property_image }) => <View
             key={_id}
             style={{
-              paddingVertical: 10,
-              paddingHorizontal: 20,
+              padding: 10,
               marginBottom: 20,
               backgroundColor: "#0066ff0f",
               borderRadius: 20
             }}
           >
-              <Image
-                source={{uri:'https://placehold.co/600x400/EEE/31343C'}}
-                style={{ width: 200, height: 150 }}
-              />
-            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+            <Image
+              // uri: 'https://img.freepik.com/free-photo/3d-house-model-with-modern-architecture_23-2151004049.jpg'
+              source={{ uri: property_image }}
+              style={{
+                width: "auto", height: 150,
+                borderRadius: 10,
+                marginBottom: 10,
+              }}
+              onError={(error) => console.log('Image loading error:', error.nativeEvent)}
+              onLoadStart={() => console.log('Image loading started', property_image)}
+              onLoad={() => console.log('Image loading successful')}
+            />
+            <View style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginBottom: 10,
+            }}>
               <Text>{property_location}</Text>
               <Text>{price_range}</Text>
             </View>
+            <Button
+              title='View'
+              color='#00aaf0'
+            />
           </View>
           )
         }
       </View>
-    </ScrollView>
+    </ScrollView >
   )
 }
 
