@@ -2,6 +2,7 @@ import { View } from 'react-native';
 import { useLinkBuilder, useTheme } from '@react-navigation/native';
 import { Text, PlatformPressable } from '@react-navigation/elements';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import Icon from '@react-native-vector-icons/evil-icons';
 
 
 function MyTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
@@ -51,8 +52,14 @@ function MyTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
                         onLongPress={onLongPress}
                         style={{ flex: 1 }}
                     >
-                        <View style={{ height: 30 }}>
-                            
+                        <View style={{ paddingVertical: 5 }}>
+                            <Icon name={label === 'Home' ? 'heart'
+                                : label === 'Properties' ? 'image'
+                                    : label === 'Profile' ? 'user'
+                                        : 'user'}
+                                size={30} color={isFocused ? colors.primary : colors.text}
+                                style={{ textAlign: "center" }}
+                            />
                             <Text style={{
                                 color: isFocused ? colors.primary : colors.text,
                                 textAlign: "center",

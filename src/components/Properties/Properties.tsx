@@ -35,7 +35,7 @@ const Properties = () => {
       <Text
         style={{
           fontSize: 50, textAlign: "center",
-          marginBottom: 20, color: "white"
+          marginBottom: 20, color: "#0aa0ff"
         }}
       >Properties</Text>
       {

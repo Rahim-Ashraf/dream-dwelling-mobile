@@ -1,5 +1,15 @@
-import { useState } from 'react';
-import { View, Text, Image, Button, SafeAreaView, Modal, Alert, Pressable } from 'react-native'
+import { useEffect, useState } from 'react';
+import {
+    View,
+    Text,
+    Image,
+    Button,
+    SafeAreaView,
+    Modal,
+    Alert,
+    Pressable,
+    Dimensions
+} from 'react-native'
 
 interface Property {
     _id: string;
@@ -16,6 +26,20 @@ interface Property {
 const Card = ({ property }: { property: Property }) => {
     const [modalVisible, setModalVisible] = useState(false)
 
+    const [orientation, setOrientation] = useState("portrait")
+    const [deviceheight, setDeviceHeight] = useState<Number>()
+    const detectOrientation = () => {
+        const { height, width } = Dimensions.get("window")
+        setDeviceHeight(height)
+        setOrientation(width > height ? 'landscape' : 'portrait')
+    }
+    useEffect(() => {
+        detectOrientation(); // Initial detection
+        const subscription = Dimensions.addEventListener('change', detectOrientation);
+
+        return () => subscription.remove(); // Cleanup
+    }, []);
+
     return (
         <View
             key={property._id}
@@ -27,7 +51,8 @@ const Card = ({ property }: { property: Property }) => {
             <Image
                 source={{ uri: 'https://img.freepik.com/free-photo/3d-house-model-with-modern-architecture_23-2151004049.jpg' }}
                 style={{
-                    width: "auto", height: 200,
+                    width: "auto",
+                    height: orientation === "landscape" ? deviceheight as number : 200,
                     borderRadius: 10,
                     marginBottom: 10,
                 }}

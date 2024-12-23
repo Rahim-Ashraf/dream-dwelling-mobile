@@ -78,7 +78,6 @@ const Home = ({ navigation }: Props) => {
           </View>
         </View>
       </ImageBackground>
-
       <View style={{ padding: 20 }}>
         <Text style={{
           fontSize: 30, textAlign: "center",
