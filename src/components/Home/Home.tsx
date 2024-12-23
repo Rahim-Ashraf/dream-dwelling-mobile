@@ -1,6 +1,15 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
-import { Button, Image, ImageBackground, ScrollView, Text, View } from 'react-native';
+import {
+  Button,
+  Image,
+  ImageBackground,
+  ScrollView,
+  Text,
+  View,
+  Platform,
+  Dimensions,
+} from 'react-native';
 
 type RootStackParamList = {
   Home: undefined;
@@ -28,6 +37,20 @@ const Home = ({ navigation }: Props) => {
       })
       .catch(err => console.log(err))
   }, [])
+
+  const [orientation, setOrientation] = useState("portrait")
+  const [deviceheight, setDeviceHeight] = useState<Number>()
+  const detectOrientation = () => {
+    const { height, width } = Dimensions.get("window")
+    setDeviceHeight(height)
+    setOrientation(width > height ? 'landscape' : 'portrait')
+  }
+  useEffect(() => {
+    detectOrientation(); // Initial detection
+    const subscription = Dimensions.addEventListener('change', detectOrientation);
+
+    return () => subscription.remove(); // Cleanup
+  }, []);
 
   return (
     <ScrollView>
@@ -68,20 +91,20 @@ const Home = ({ navigation }: Props) => {
               padding: 10,
               marginBottom: 20,
               backgroundColor: "#0066ff0f",
-              borderRadius: 20
+              borderRadius: 20,
             }}
           >
             <Image
               // uri: 'https://img.freepik.com/free-photo/3d-house-model-with-modern-architecture_23-2151004049.jpg'
               source={{ uri: 'https://img.freepik.com/free-photo/3d-house-model-with-modern-architecture_23-2151004049.jpg' }}
               style={{
-                width: "auto", height: 200,
+                width: "auto", height: orientation === 'landscape' ? deviceheight as number : 200,
                 borderRadius: 10,
                 marginBottom: 10,
               }}
               onError={(error) => console.log('Image loading error:', error.nativeEvent)}
-              // onLoadStart={() => console.log('Image loading started', property_image)}
-              // onLoad={() => console.log('Image loading successful')}
+            // onLoadStart={() => console.log('Image loading started', property_image)}
+            // onLoad={() => console.log('Image loading successful')}
             />
             <View style={{
               flexDirection: "row",
