@@ -21,7 +21,6 @@ const Properties = () => {
       try {
         const res = await fetch('https://dream-dwellings-server.vercel.app/verified-properties')
         const data = await res.json()
-        console.log(data)
         setProperties(data)
       } catch (error) {
         console.log(error)
